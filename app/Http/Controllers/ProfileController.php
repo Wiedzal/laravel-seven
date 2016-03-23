@@ -14,40 +14,40 @@ class ProfileController extends Controller {
     
     protected $auth;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
      
     public function __construct(Guard $auth, Registrar $registrar)
-	{
-		$this->auth = $auth;
+    {
+        $this->auth = $auth;
         $this->registrar = $registrar;
 
         $this->middleware('auth');
-	}
+    }
      
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit()
-	{
-		$user = $this->auth->user();
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit()
+    {
+        $user = $this->auth->user();
         return view('profile/index', ['user' => $user]);
-	}
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update(Request $request)
-	{
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(Request $request)
+    {
         $user = $this->auth->user();
         $model = User::find($user->id);
         
@@ -67,5 +67,5 @@ class ProfileController extends Controller {
         $model->save();
         
         return redirect()->route('profile.edit')->with('message', trans('messages.data_changed_success'));
-	}
+    }
 }
